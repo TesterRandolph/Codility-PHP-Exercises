@@ -8,7 +8,6 @@ function solution($N) {
 
     $MaxLength = 0;
     $ZeroLength = 0;
-    $CountSwitch = false;
 
     $StrLength = sizeof($BinaryStr);
 
@@ -16,17 +15,11 @@ function solution($N) {
         $PendingBit = intval(array_shift($BinaryStr));
 
         if ($PendingBit === 1) {
-            if ($CountSwitch === false) {
-                $CountSwitch = true;
-                $ZeroLength = 0;
-            } else {
-                if ($ZeroLength > 0 && $ZeroLength > $MaxLength) {
-                    $MaxLength = $ZeroLength;
-                }
-
-                $CountSwitch = false;
-                $ZeroLength = 0;
+            if ($ZeroLength > 0 && $ZeroLength > $MaxLength) {
+                $MaxLength = $ZeroLength;
             }
+
+            $ZeroLength = 0;
         } else {
             $ZeroLength++;
         }
