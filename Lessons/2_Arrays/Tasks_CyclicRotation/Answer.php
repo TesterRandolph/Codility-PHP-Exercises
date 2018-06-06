@@ -10,7 +10,7 @@ function solution($A, $K) {
 
     if ($ArrLength < 0 || $ArrLength > 100) return false;
 
-    if ($ArrLength === 0) return $A;
+    if ($ArrLength === 0 || $ArrLength === 1) return $A;
 
     if ($K < 0 || $K > 100) return false;
 
@@ -34,7 +34,7 @@ function solution($A, $K) {
                 if ($j === $ArrLength - 1) {
                     $temp = $A[$j];
                 }
-                
+
                 $A[$j] = $A[$j - 1];
             }
         }
