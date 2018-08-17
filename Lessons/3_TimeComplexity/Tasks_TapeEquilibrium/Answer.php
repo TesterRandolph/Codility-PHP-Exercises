@@ -6,10 +6,6 @@ function solution($A) {
     // write your code in PHP7.0
     $arrLength = sizeof($A);
     $total = 0;
-    $tmp_1 = 0;
-    $tmp_2 = 0;
-
-    $minimal = -1;
     $difference = 0;
 
     if ($arrLength < 2 || $arrLength > 100000) return 0;
@@ -35,7 +31,13 @@ function solution($A) {
         $total += $A[$i];
     }
 
-    for ($i = 0; $i < $arrLength; $i++)
+    $tmp_1 = 0;
+    $tmp_2 = 0;
+    $minimal = -1;
+
+    $loopEnd = $arrLength - 1;
+
+    for ($i = 0; $i < $loopEnd; $i++)
     {
         $tmp_1 += $A[$i];
 
