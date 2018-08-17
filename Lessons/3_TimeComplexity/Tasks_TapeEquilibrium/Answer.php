@@ -6,13 +6,27 @@ function solution($A) {
     // write your code in PHP7.0
     $arrLength = sizeof($A);
     $total = 0;
-    $check = 0;
-    $tmp = 0;
+    $tmp_1 = 0;
+    $tmp_2 = 0;
 
     $minimal = -1;
     $difference = 0;
 
     if ($arrLength < 2 || $arrLength > 100000) return 0;
+
+    if ($arrLength === 2)
+    {
+        $difference = $A[0] - $A[1];
+
+        if ($difference < 0)
+        {
+            return 0 - $difference;
+        }
+        else
+        {
+            return $difference;
+        }
+    }
 
     for ($i = 0; $i < $arrLength; $i++)
     {
@@ -21,19 +35,17 @@ function solution($A) {
         $total += $A[$i];
     }
 
-    $check = $total / 2;
-
     for ($i = 0; $i < $arrLength; $i++)
     {
-        $tmp += $A[$i];
+        $tmp_1 += $A[$i];
 
-        if ($tmp < $check)
+        $tmp_2 = $total - $tmp_1;
+
+        $difference = $tmp_1 - $tmp_2;
+
+        if ($difference < 0)
         {
-            $difference = $total - $tmp * 2;
-        }
-        else
-        {
-            $difference = $tmp * 2 - $total;
+            $difference = 0 - $difference;
         }
 
         if ($minimal === -1 || $difference < $minimal)
