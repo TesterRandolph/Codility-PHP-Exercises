@@ -7,8 +7,10 @@ function solution($A) {
     $min = 1;
     $max = 100000;
 
-    $arrLength = sizeof($A);
+    $tmpArray = [];
 
+    $arrLength = sizeof($A);
+    
     if ($X < $min || $X > $max) return -1;
 
     if ($arrLength < $min || $arrLength > $max) return -1;
@@ -17,8 +19,30 @@ function solution($A) {
     {
         if ($A[$i] < $min || $A[$i] > $X) return -1;
 
-        if ($A[$i] === $X) return $i;
+        $tmpArray[$A[$i]][] = $i;
     }
 
-    return -1;
+    $result = -1;
+
+    for ($i = $min; $i <= $X; )
+    {
+        $index = 0;
+
+        while(sizeof($tmpArray[$i]) > 0)
+        {
+            $tmp = array_shift($tmpArray[$i]);
+
+            if ($tmp > $result)
+            {
+                $result = $tmp;
+                break;
+            }
+
+            if ($tmp < $result) break;
+        }
+
+        $i++;
+    }
+
+    return $result;
 }
