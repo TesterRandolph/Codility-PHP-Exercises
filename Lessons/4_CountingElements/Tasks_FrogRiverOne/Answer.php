@@ -26,9 +26,9 @@ function solution($A) {
 
     for ($i = $min; $i <= $X; )
     {
-        $index = 0;
+        if (!isset($tmpArray[$i])) return -1;
 
-        while(sizeof($tmpArray[$i]) > 0)
+        while (sizeof($tmpArray[$i]) > 0)
         {
             $tmp = array_shift($tmpArray[$i]);
 
