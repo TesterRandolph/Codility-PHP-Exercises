@@ -26,7 +26,8 @@ function solution($A) {
             if (!isset($tmpArray[$index])) $tmpArray[$index] = 0;
 
             $tmpArray[$index]++;
-            $maxElement = $tmpArray[$index];
+
+            if ($tmpArray[$index] > $maxElement) $maxElement = $tmpArray[$index];
         }
         else if ($A[$i] === ($N + 1))
         {
