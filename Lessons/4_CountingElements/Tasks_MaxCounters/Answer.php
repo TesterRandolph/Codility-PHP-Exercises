@@ -21,6 +21,7 @@ function solution($A) {
 
     for ($i = 0; $i < $arrLength; $i++)
     {
+        
         if ($A[$i] >= $min && $A[$i] <= $N)
         {
             $index = $A[$i]-1;
@@ -46,18 +47,15 @@ function solution($A) {
         }
     }
 
-    if ($maxOperation[0] === 1)
+    for ($j = 0; $j < $N; $j++)
     {
-        for ($j = 0; $j < $N; $j++)
+        if (!isset($tmpArray[$j])) $tmpArray[$j] = 0;
+
+        if ($maxOperation[0] === 1 && $tmpArray[$j] < $maxOperation[1])
         {
-            if (!isset($tmpArray[$j])) $tmpArray[$j] = $maxOperation[1];
-
-            if ($tmpArray[$j] < $maxOperation[1])
-            {
-                $tmpArray[$j] = $maxOperation[1];
-            }
-
+            $tmpArray[$j] = $maxOperation[1];
         }
+
     }
 
     return $tmpArray;
