@@ -12,6 +12,8 @@ function solution($A) {
     $max = 100000;
 
     $maxElement = 0;
+    
+    $maxOperation = [0, 0];
 
     if ($N < $min || $N > $max) return [];
 
@@ -23,7 +25,17 @@ function solution($A) {
         {
             $index = $A[$i]-1;
 
-            if (!isset($tmpArray[$index])) $tmpArray[$index] = 0;
+            if (!isset($tmpArray[$index]))
+            {
+                if ($maxOperation[0] === 1)
+                {
+                    $tmpArray[$index] = $maxOperation[1];
+                }
+                else
+                {
+                    $tmpArray[$index] = 0;
+                }
+            }
 
             $tmpArray[$index]++;
 
@@ -31,14 +43,25 @@ function solution($A) {
         }
         else if ($A[$i] === ($N + 1))
         {
-            for ($j = 0; $j < $N; $j++)
-            {
-                $tmpArray[$j] = $maxElement;
-            }
+            $maxOperation = [1, $maxElement];
         }
         else
         {
             return [];
+        }
+    }
+
+    if ($maxOperation[0] === 1)
+    {
+        for ($j = 0; $j < $N; $j++)
+        {
+            if (!isset($tmpArray[$j])) $tmpArray[$j] = $maxOperation[1];
+
+            if ($tmpArray[$j] < $maxOperation[1])
+            {
+                $tmpArray[$j] = $maxOperation[1];
+            }
+
         }
     }
 
