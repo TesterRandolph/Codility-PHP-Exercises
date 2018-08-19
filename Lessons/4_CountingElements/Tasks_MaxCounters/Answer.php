@@ -25,16 +25,11 @@ function solution($A) {
         {
             $index = $A[$i]-1;
 
-            if (!isset($tmpArray[$index]))
+            if (!isset($tmpArray[$index])) $tmpArray[$index] = 0;
+
+            if ($maxOperation[0] === 1 && $tmpArray[$index] < $maxOperation[1])
             {
-                if ($maxOperation[0] === 1)
-                {
-                    $tmpArray[$index] = $maxOperation[1];
-                }
-                else
-                {
-                    $tmpArray[$index] = 0;
-                }
+                $tmpArray[$index] = $maxOperation[1];
             }
 
             $tmpArray[$index]++;
