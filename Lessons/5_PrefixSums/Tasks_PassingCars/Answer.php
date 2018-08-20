@@ -28,5 +28,7 @@ function solution($A) {
         }
     }
 
+    if ($total > 1000000000) return -1;
+
     return $total;
 }
