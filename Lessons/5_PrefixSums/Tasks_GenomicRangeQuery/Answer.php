@@ -19,30 +19,7 @@ function solution($S, $P, $Q) {
 
     if ($arrLength < $one || $arrLength > $maxM) return [];
 
-    for ($i = 0; $i < $strLength; $i++)
-    {
-        switch ($S[$i])
-        {
-            case 'A':
-                $S[$i] = 1;
-                break;
-
-            case 'C':
-                $S[$i] = 2;
-                break;
-
-            case 'G':
-                $S[$i] = 3;
-                break;
-
-            case 'T':
-                $S[$i] = 4;
-                break;
-
-            default:
-                return [];
-        }
-    }
+    $S = preg_replace(['/A/', '/C/', '/G/', '/T/'], ['1','2','3','4'], $S);
 
     $result = [];
 
@@ -54,19 +31,24 @@ function solution($S, $P, $Q) {
 
         if ($P[$j] > $Q[$j]) return [];
 
+        if ($P[$j] === $Q[$j])
+        {
+            $result[$j] = intval($S[$P[$j]]);
+            continue;
+        }
+
         $tmpLength = $Q[$j] - $P[$j] + 1;
 
         $tmp = substr($S, $P[$j], $tmpLength);
 
-        for ($t = 1; $t <= 4; $t++)
-        {
-            if (preg_match('/(' . $t . ')/', $tmp, $matches))
-            {
-                $result[$j] = $t;
-                break;
-            }
-        }
+        $tmp = str_split($tmp);
+
+        $tmp = array_unique($tmp, SORT_NUMERIC);
+
+        asort($tmp);
+        
+        $result[$j] = intval(array_shift($tmp));
     }
-    
+
     return $result;
 }
