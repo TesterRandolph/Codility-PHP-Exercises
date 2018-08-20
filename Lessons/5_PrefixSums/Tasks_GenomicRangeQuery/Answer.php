@@ -53,14 +53,18 @@ function solution($S, $P, $Q) {
         if ($Q[$j] < $zero || $Q[$j] >= $maxN) return [];
 
         if ($P[$j] > $Q[$j]) return [];
-        
+
         $tmpLength = $Q[$j] - $P[$j] + 1;
 
         $tmp = substr($S, $P[$j], $tmpLength);
-        
-        for ($t = 0; $t < $tmpLength; $t++)
+
+        for ($t = 1; $t <= 4; $t++)
         {
-            if (!isset($result[$j]) || $result[$j] > $tmp[$t]) $result[$j] = intval($tmp[$t]);
+            if (preg_match('/(' . $t . ')/', $tmp, $matches))
+            {
+                $result[$j] = $t;
+                break;
+            }
         }
     }
     
