@@ -40,15 +40,31 @@ function solution($S, $P, $Q) {
         $tmpLength = $Q[$j] - $P[$j] + 1;
 
         $tmp = substr($S, $P[$j], $tmpLength);
-
-        $tmp = str_split($tmp);
-
-        $tmp = array_unique($tmp, SORT_NUMERIC);
-
-        asort($tmp);
         
-        $result[$j] = intval(array_shift($tmp));
-    }
+        if (preg_match('/(1)/', $tmp, $matches))
+        {
+            $result[$j] = 1;
+            continue;
+        }
 
+        if (preg_match('/(2)/', $tmp, $matches))
+        {
+            $result[$j] = 2;
+            continue;
+        }
+
+        if (preg_match('/(3)/', $tmp, $matches))
+        {
+            $result[$j] = 3;
+            continue;
+        }
+
+        if (preg_match('/(4)/', $tmp, $matches))
+        {
+            $result[$j] = 4;
+            continue;
+        }
+    }
+    
     return $result;
 }
