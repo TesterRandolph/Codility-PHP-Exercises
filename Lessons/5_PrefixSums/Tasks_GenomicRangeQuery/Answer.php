@@ -40,31 +40,31 @@ function solution($S, $P, $Q) {
         $tmpLength = $Q[$j] - $P[$j] + 1;
 
         $tmp = substr($S, $P[$j], $tmpLength);
-        
-        if (preg_match('/(1)/', $tmp, $matches))
+
+        if (strpos($tmp, '1') !== false)
         {
             $result[$j] = 1;
             continue;
         }
 
-        if (preg_match('/(2)/', $tmp, $matches))
+        if (strpos($tmp, '2') !== false)
         {
             $result[$j] = 2;
             continue;
         }
 
-        if (preg_match('/(3)/', $tmp, $matches))
+        if (strpos($tmp, '3') !== false)
         {
             $result[$j] = 3;
             continue;
         }
 
-        if (preg_match('/(4)/', $tmp, $matches))
+        if (strpos($tmp, '4') !== false)
         {
             $result[$j] = 4;
             continue;
         }
     }
-    
+
     return $result;
 }
