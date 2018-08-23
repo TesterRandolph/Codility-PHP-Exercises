@@ -146,7 +146,7 @@ function solution($A) {
     {
         if ($mixTopArray[1][2] > 0)
         {
-            return $mixTopArray[0][2] * $mixTopArray[1][2] * $maxLeftArray[2][2];
+            return $mixTopArray[0][2] * $mixTopArray[1][2] * $maxLeftArray[1][2];
         }
         else
         {
