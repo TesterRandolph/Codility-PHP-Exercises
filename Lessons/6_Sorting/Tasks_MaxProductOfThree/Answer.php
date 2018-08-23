@@ -46,7 +46,7 @@ function solution($A) {
 
             for ($j = 0; $j < $minLeftArrLength; $j++)
             {
-                if (isset($minLeftArray[$j]) && $targetArray[1] > $minLeftArray[$j][1])
+                if (isset($minLeftArray[$j]) && $targetArray[2] > $minLeftArray[$j][2])
                 {
                     $swicthTmp = $minLeftArray[$j];
                     $minLeftArray[$j] = $targetArray;
@@ -141,7 +141,7 @@ function solution($A) {
         }
         else
         {
-            return $mixTopArray[0][2] * $mixTopArray[1][2] * $maxLeftArray[2][2];
+            return $mixTopArray[0][2] * $mixTopArray[1][2] * $maxLeftArray[1][2];
         }
     }
     else
