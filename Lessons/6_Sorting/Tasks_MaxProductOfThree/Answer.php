@@ -6,58 +6,151 @@ function solution($A) {
     // write your code in PHP7.0
     $arrLength = sizeof($A);
 
-    $tmpArray = [];
-    $tmpLength = 0;
+    $mixTopArray = [];
+    $mixTopArrLength = 0;
+
+    $minLeftArray = [];
+    $minLeftArrLength = 0;
+
+    $maxLeftArray = [];
+    $maxLeftArrLength = 0;
+
+    $maxRightArray = [];
+    $maxRightArrLength = 0;
 
     if ($arrLength < 3 || $arrLength > 100000) return 0;
     
     if ($arrLength === 3) return $A[0] * $A[1] * $A[1];
 
-    $countNotZero = 0;
+    $countLeft = 0;
+    $countRight = 0;
+
+    $tmp = 0;
 
     for ($i = 0; $i < $arrLength; $i++)
     {
         if ($A[$i] < -1000 || $A[$i] > 1000) return 0;
+
+        $tmpArray = [$i, 0, $A[$i]];
 
         if ($A[$i] === 0)
         {
             continue;
         }
         else if ($A[$i] < 0)
-            $tmp = 0 - $A[$i];
+        {
+            $tmpArray[1] = 0 - $A[$i];
+            $countLeft++;
+
+            $targetArray = $tmpArray;
+
+            for ($j = 0; $j < $minLeftArrLength; $j++)
+            {
+                if (isset($minLeftArray[$j]) && $targetArray[1] > $minLeftArray[$j][1])
+                {
+                    $swicthTmp = $minLeftArray[$j];
+                    $minLeftArray[$j] = $targetArray;
+                    $targetArray = $swicthTmp;
+                }
+            }
+
+            if ($minLeftArrLength < 3)
+            {
+                $minLeftArray[$mixTopArrLength] = $targetArray;
+                $mixTopArrLength++;
+            }
+
+            $targetArray = $tmpArray;
+
+            for ($j = 0; $j < $maxLeftArrLength; $j++)
+            {
+                if (isset($maxLeftArray[$j]) && $targetArray[1] > $maxLeftArray[$j][1])
+                {
+                    $swicthTmp = $maxLeftArray[$j];
+                    $maxLeftArray[$j] = $targetArray;
+                    $targetArray = $swicthTmp;
+                }
+            }
+    
+            if ($maxLeftArrLength < 2)
+            {
+                $maxLeftArray[$maxLeftArrLength] = $targetArray;
+                $maxLeftArrLength++;
+            }
         }
         else
         {
-            $tmp = $A[$i];
-        }
+            $tmpArray[1] = $A[$i];
+            $countRight++;
 
-        $countNotZero++;
+            $targetArray = $tmpArray;
 
-        $tmp = [$i, $tmp, $A[$i]];
-
-        for ($j = 0; $j < $tmpLength; $j++)
-        {
-            if (isset($tmpArray[$j]) && $tmp[1] > $tmpArray[$j][1])
+            for ($j = 0; $j < $maxRightArrLength; $j++)
             {
-                $swicthTmp = $tmpArray[$j];
-                $tmpArray[$j] = $tmp;
-                $tmp = $swicthTmp;
+                if (isset($maxRightArray[$j]) && $targetArray[1] > $maxRightArray[$j][1])
+                {
+                    $swicthTmp = $maxRightArray[$j];
+                    $maxRightArray[$j] = $targetArray;
+                    $targetArray = $swicthTmp;
+                }
+            }
+
+            if ($maxRightArrLength < 3)
+            {
+                $maxRightArray[$maxRightArrLength] = $targetArray;
+                $maxRightArrLength++;
             }
         }
 
-        if ($tmpLength < 5)
+        for ($j = 0; $j < $mixTopArrLength; $j++)
         {
-            $tmpArray[$tmpLength] = $tmp;
-            $tmpLength++;
+            if (isset($mixTopArray[$j]) && $tmpArray[1] > $mixTopArray[$j][1])
+            {
+                $swicthTmp = $mixTopArray[$j];
+                $mixTopArray[$j] = $tmpArray;
+                $tmpArray = $swicthTmp;
+            }
+        }
+
+        if ($mixTopArrLength < 5)
+        {
+            $mixTopArray[$mixTopArrLength] = $tmpArray;
+            $mixTopArrLength++;
         }
     }
 
-    if ($tmpLength < 3) return 0;
+    if ($mixTopArrLength < 3) return 0;
 
-    if ($tmpLength === 3)
+    if ($mixTopArrLength === 3)
     {
-        return $tmpArray[0][2] * $tmpArray[1][2] * $tmpArray[2][2];
+        return $mixTopArray[0][2] * $mixTopArray[1][2] * $mixTopArray[2][2];
     }
 
-    var_dump($tmpArray);
+    if ($countRight === 0)
+    {
+        return $minLeftArray[0][2] * $minLeftArray[1][2] * $minLeftArray[2][2];
+    }
+
+    if ($mixTopArray[0][2] > 0)
+    {
+        if ($mixTopArray[1][2] > 0)
+        {
+            return $mixTopArray[0][2] * $mixTopArray[1][2] * $maxRightArray[2][2];
+        }
+        else
+        {
+            return $mixTopArray[0][2] * $mixTopArray[1][2] * $maxLeftArray[2][2];
+        }
+    }
+    else
+    {
+        if ($mixTopArray[1][2] > 0)
+        {
+            return $mixTopArray[0][2] * $mixTopArray[1][2] * $maxLeftArray[2][2];
+        }
+        else
+        {
+            return $mixTopArray[0][2] * $mixTopArray[1][2] * $maxRightArray[0][2];
+        }
+    }
 }
