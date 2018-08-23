@@ -71,7 +71,7 @@ function solution($A) {
                     $targetArray = $swicthTmp;
                 }
             }
-    
+
             if ($maxLeftArrLength < 2)
             {
                 $maxLeftArray[$maxLeftArrLength] = $targetArray;
@@ -128,6 +128,8 @@ function solution($A) {
 
     if ($countRight === 0)
     {
+        if ($countLeft !== $arrLength) return 0;
+
         return $minLeftArray[0][2] * $minLeftArray[1][2] * $minLeftArray[2][2];
     }
 
