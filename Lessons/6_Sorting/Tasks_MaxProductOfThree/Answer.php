@@ -146,7 +146,14 @@ function solution($A) {
     {
         if ($mixTopArray[1][2] > 0)
         {
-            return $mixTopArray[0][2] * $mixTopArray[1][2] * $maxLeftArray[1][2];
+            if (isset($maxLeftArray[1]))
+            {
+                return $mixTopArray[0][2] * $mixTopArray[1][2] * $maxLeftArray[1][2];
+            }
+            else
+            {
+                return $maxRightArray[0][2] * $maxRightArray[1][2] * $maxRightArray[2][2];
+            }
         }
         else
         {
