@@ -20,7 +20,7 @@ function solution($A) {
 
     if ($arrLength < 3 || $arrLength > 100000) return 0;
     
-    if ($arrLength === 3) return $A[0] * $A[1] * $A[1];
+    if ($arrLength === 3) return $A[0] * $A[1] * $A[2];
 
     $countLeft = 0;
     $countRight = 0;
