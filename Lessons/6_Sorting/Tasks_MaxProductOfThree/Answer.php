@@ -56,8 +56,8 @@ function solution($A) {
 
             if ($minLeftArrLength < 3)
             {
-                $minLeftArray[$mixTopArrLength] = $targetArray;
-                $mixTopArrLength++;
+                $minLeftArray[$minLeftArrLength] = $targetArray;
+                $minLeftArrLength++;
             }
 
             $targetArray = $tmpArray;
