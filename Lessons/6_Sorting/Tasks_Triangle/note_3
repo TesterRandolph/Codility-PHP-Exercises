@@ -1,0 +1,91 @@
+A[0]	A[1]	A[2]	A[3]	A[4]	A[5]
+
+
+for ($i = 0; $i < $arrLength - 2; $i++)
+{
+	$j = $i + 1;
+	$separate = 1;
+
+	while ($separate < $arrLength - $j)
+	{
+        if ($A[$i] + $A[$j] > $A[$j + $separate] &&
+            $A[$i] + $A[$j + $separate] > $A[$j] &&
+            $A[$j] + $A[$j + $separate] > $A[$i])
+        {
+            return 1;
+        }
+
+        if ($j + $separate > $arrLength)
+        {
+        	$j = $i + 1;
+        	$separate++;
+        }
+        else
+        {
+        	$j++;
+        }
+	}
+}
+
+
+i = 0, j = i + 1, k = 1
+A[0]	A[1]	A[2]
+
+i = 0, j = i + 2, k = 1
+A[0]			A[2]	A[3]
+
+i = 0, j = i + 3, k = 1
+A[0]					A[3]	A[4]
+
+i = 0, j = i + 4, k = 1
+A[0]							A[4]	A[5]
+
+i = 0, j = i + 1, k = 2
+A[0]	A[1]			A[3]
+
+i = 0, j = i + 2, k = 2
+A[0]			A[2]			A[4]
+
+i = 0, j = i + 3, k = 2
+A[0]					A[3]			A[5]
+
+i = 0, j = i + 1, k = 3
+A[0]	A[1]					A[4]
+
+i = 0, j = i + 2, k = 3
+A[0]			A[2]					A[5]
+
+i = 0, j = i + 1, k = 4
+A[0]	A[1]							A[5]
+
+		i = 1, j = i + 1, k = 1
+		A[1]	A[2]	A[3]
+
+		i = 1, j = i + 2, k = 1
+		A[1]			A[3]	A[4]
+
+		i = 1, j = i + 3, k = 1
+		A[1]					A[4]	A[5]
+
+		i = 1, j = i + 1, k = 2
+		A[1]	A[2]			A[4]
+
+		i = 1, j = i + 2, k = 2
+		A[1]			A[3]			A[5]
+
+				i = 2, j = i + 1, k = 1
+				A[2]	A[3]	A[4]
+
+				i = 2, j = i + 2, k = 1
+				A[2]			A[4]	A[5]
+
+				i = 2, j = i + 1, k = 2
+				A[2]	A[3]			A[5]
+
+						i = 3, j = i + 1, k = 1
+						A[3]	A[4]	A[5]
+
+
+
+
+
