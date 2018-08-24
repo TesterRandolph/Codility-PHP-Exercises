@@ -13,50 +13,31 @@ function solution($A) {
         if ($A[$l] < -2147483648 || $A[$l] > 2147483648) return 0;
     }
 
-    if ($arrLength % 2 === 1)
+    for ($i = 0; $i < $arrLength - 2; $i++)
     {
-        $half = ($arrLength - 1) / 2;
-    }
-    else
-    {
-        $half = $arrLength / 2;
-    }
+        $j = $i + 1;
+        $separate = 1;
 
-    $oHalf = $half - 1;
+        $limit = $arrLength - $j;
 
-    for ($i = 0; $i < $half; $i++)
-    {
-        if ($i < $oHalf)
+        while ($separate < $limit)
         {
-            for ($j = $i + 1; $j < $half; $j++)
+            if ($A[$i] + $A[$j] > $A[$j + $separate] &&
+                $A[$i] + $A[$j + $separate] > $A[$j] &&
+                $A[$j] + $A[$j + $separate] > $A[$i])
             {
-                for ($k = $j + 1; $k < $arrLength; $k++)
-                {
-                    if ($A[$i] + $A[$j] > $A[$k] &&
-                        $A[$i] + $A[$k] > $A[$j] &&
-                        $A[$k] + $A[$j] > $A[$i])
-                    {
-                        return 1;
-                    }
-                }
+                return 1;
+            }
+
+            $j++;
+
+            if ($j + $separate === $arrLength)
+            {
+                $j = $i + 1;
+                $separate++;
             }
         }
-
-        $l = $arrLength - $i - 1;
-
-        for ($m = $l - 1; $m > $oHalf; $m--)
-        {
-            for ($n = $m - 1; $n >= 0; $n--)
-            {
-                if ($A[$l] + $A[$m] > $A[$n] &&
-                    $A[$l] + $A[$n] > $A[$m] &&
-                    $A[$m] + $A[$n] > $A[$l])
-                {
-                    return 1;
-                }
-            }
-        }
-   }
+    }
 
    return 0;
 }
