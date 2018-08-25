@@ -22,16 +22,18 @@ function solution($A) {
 
         while ($separate < $limit)
         {
-            if ($A[$i] + $A[$j] > $A[$j + $separate] &&
-                $A[$i] + $A[$j + $separate] > $A[$j] &&
-                $A[$j] + $A[$j + $separate] > $A[$i])
+            $nextJ = $j + $separate;
+
+            if ($A[$i] + $A[$j] > $A[$nextJ] &&
+                $A[$i] + $A[$nextJ] > $A[$j] &&
+                $A[$j] + $A[$nextJ] > $A[$i])
             {
                 return 1;
             }
 
             $j++;
 
-            if ($j + $separate === $arrLength)
+            if ($nextJ === $arrLength - 1)
             {
                 $j = $i + 1;
                 $separate++;
