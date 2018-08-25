@@ -19,6 +19,8 @@ function solution($A) {
 
     $tmpArrLength = sizeof($tmpArray);
 
+    if ($tmpArrLength < 3) return 0;
+
     for ($i = 0; $i < $tmpArrLength - 2; $i++)
     {
         $j = $i + 1;
