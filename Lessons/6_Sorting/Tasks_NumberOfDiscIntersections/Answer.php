@@ -15,9 +15,15 @@ function solution($A) {
 
     $tmpArray = [];
 
-    for ($i = 0; $i < $maxIndex; $i++)
+    $countPoints = 0;
+
+    for ($i = 0; $i < $arrLength; $i++)
     {
         if ($A[$i] < 0 || $A[$i] > 2147483647) return 0;
+
+        if ($A[$i] === 0) $countPoints++;
+
+        if ($i === $maxIndex) break;
 
         $leftLimit = $i - $A[$i];
         $rightLimit = $i + $A[$i];
@@ -33,6 +39,10 @@ function solution($A) {
             $tmpArray[] = [$i, $leftLimit, $rightLimit];
         }
     }
+    
+    if ($countPoints === $arrLength) return 0;
+
+    if ($intersect > 10000000) return -1;
 
     $tmpLength = sizeof($tmpArray);
 
