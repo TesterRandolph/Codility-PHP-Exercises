@@ -20,13 +20,19 @@ function solution($A) {
         $leftLimit = $i - $A[$i];
         $rightLimit = $i + $A[$i];
 
-        if ($rightLimit > $maxIndex)
+        if ($rightLimit >= $maxIndex)
         {
-            $intersect += $arrLength - $i + 1;
+            $intersect += $maxIndex - $i;
 
             if ($intersect > 10000000) return -1;
 
             continue;
+        }
+        else
+        {
+            $intersect += $rightLimit - $i;
+
+            if ($intersect > 10000000) return -1;
         }
 
         for ($j = $rightLimit + 1; $j < $arrLength; $j++)
