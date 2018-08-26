@@ -13,6 +13,8 @@ function solution($A) {
     $maxIndex = $arrLength - 1;
     $intersect = 0;
 
+    $tmpArray = [];
+
     for ($i = 0; $i < $maxIndex; $i++)
     {
         if ($A[$i] < 0 || $A[$i] > 2147483647) return 0;
@@ -27,12 +29,22 @@ function solution($A) {
         else
         {
             $intersect += $rightLimit - $i;
-    
-            for ($j = $rightLimit + 1; $j < $arrLength; $j++)
+
+            $tmpArray[] = [$i, $leftLimit, $rightLimit];
+        }
+    }
+
+    $tmpLength = sizeof($tmpArray);
+
+    if ($tmpLength > 0)
+    {
+        for ($j = 0; $j < $tmpLength; $j++)
+        {
+            for ($k = $tmpArray[$j][2] + 1; $k < $arrLength; $k++)
             {
-                $jLeft = $j - $A[$j];
-    
-                if ($rightLimit < $jLeft)
+                $kLeft = $k - $A[$k];
+
+                if ($tmpArray[$j][2] < $kLeft)
                 {
                     continue;
                 }
@@ -43,6 +55,6 @@ function solution($A) {
     }
 
     if ($intersect > 10000000) return -1;
-    
+
     return $intersect;
 }
