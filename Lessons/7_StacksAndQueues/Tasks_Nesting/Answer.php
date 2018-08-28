@@ -4,17 +4,17 @@
 
 function solution($S) {
     // write your code in PHP7.0
+    if (empty($S)) return 1;
+
     $strLength = strlen($S);
 
     if ($strLength < 0 || $strLength > 1000000) return 0;
-
-    if ($strLength === 0) return 0;
 
     if ($strLength % 2 === 1) return 0;
 
     $leftCount = 0;
     $nestCount = 0;
-    
+
     for ($i = 0; $i < $strLength; $i++)
     {
         if ($S[$i] === '(')
