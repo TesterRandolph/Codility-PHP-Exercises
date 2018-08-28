@@ -33,7 +33,7 @@ function solution($A, $B) {
 
             $last = $tmpLength - 1;
 
-            if ($tmpArray[$last][1] === 0)
+            if ($tmpArray[$last][1] === 0 || $tmpArray[$last][1] === $B[$i])
             {
                 array_push($tmpArray, [$A[$i], $B[$i]]);
                 $tmpLength++;
@@ -47,18 +47,14 @@ function solution($A, $B) {
                     return 0;
                 }
 
-                if ($tmpArray[$last][0] < $A[$i])
+                if ($tmpArray[$last][0] > $A[$i])
                 {
-                    array_pop($tmpArray);
-                    array_push($tmpArray, [$A[$i], $B[$i]]);
+                    break;
                 }
 
-                break;
+                array_pop($tmpArray);
+                $tmpLength--;
             }
-
-            array_push($tmpArray, [$A[$i], $B[$i]]);
-            $tmpLength++;
-            break;
         }
     }
 
