@@ -55,6 +55,10 @@ function solution($A, $B) {
 
                 break;
             }
+
+            array_push($tmpArray, [$A[$i], $B[$i]]);
+            $tmpLength++;
+            break;
         }
     }
 
