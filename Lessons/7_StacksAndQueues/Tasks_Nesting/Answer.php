@@ -12,32 +12,29 @@ function solution($S) {
 
     if ($strLength % 2 === 1) return 0;
 
-    $leftCount = 0;
-    $nestCount = 0;
+    $tmpArray = [];
 
     for ($i = 0; $i < $strLength; $i++)
     {
         if ($S[$i] === '(')
         {
-            $leftCount++;
+            array_push($tmpArray, $S[$i]);
             continue;
         }
         else if ($S[$i] === ')')
         {
-            if ($leftCount > 0)
+            $tmp = array_pop($tmpArray);
+
+            if (empty($tmp) || $tmp !== '(')
             {
-                $leftCount--;
-                $nestCount++;
-                continue;
+                return 0;
             }
 
-            return 0;
+            continue;
         }
 
         return 0;
     }
 
-    if ($leftCount === 0) return 1;
-
-    return 0;
+    return 1;
 }
