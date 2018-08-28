@@ -19,7 +19,7 @@ function solution($H) {
 
         while(true)
         {
-            if ($i === 0 || $H[$i] > $tmpArray[$lastP][1])
+            if (empty($tmpArray) || $H[$i] > $tmpArray[$lastP][1])
             {
                 array_push($tmpArray, [$i, $H[$i]]);
                 
@@ -31,20 +31,24 @@ function solution($H) {
                 break;
             }
 
-            if ($H[$i] <= $tmpArray[$lastP][1])
+            if ($H[$i] < $tmpArray[$lastP][1])
             {
                 $tmp = array_pop($tmpArray);
                 $lastP--;
                 array_push($stoneArray, $tmp);
             }
 
-            if ($H[$i] === $tmpArray[$lastP][1])
+            if (!empty($tmpArray) && $H[$i] === $tmpArray[$lastP][1])
             {
                 break;
             }
         }
     }
 
-    var_dump($stoneArray);
-    return sizeof($stoneArray);
+    if (sizeof($tmpArray) === 0)
+    {
+        return sizeof($stoneArray);
+    }
+
+    return sizeof($stoneArray) + sizeof($tmpArray);
 }
