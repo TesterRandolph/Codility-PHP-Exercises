@@ -13,7 +13,15 @@ function solution($A) {
     if ($arrLength === 1) return 0;
 
     $tmpArray = [];
-    $halfLength = ceil($arrLength / 2);
+    
+    if ($arrLength % 2 === 1)
+    {
+        $halfLength = ceil($arrLength / 2);
+    }
+    else
+    {
+        $halfLength = $arrLength / 2 + 1;
+    }
 
     for ($i = 0; $i < $arrLength; $i++)
     {
@@ -28,35 +36,8 @@ function solution($A) {
         $tmpArray[$A[$i]][0]++;
         $tmpArray[$A[$i]][1] = $i;
 
-        if ($tmpArray[$A[$i]][0] > $halfLength) return $i;
+        if ($tmpArray[$A[$i]][0] >= $halfLength) return $i;
     }
 
-    $maxCount = 0;
-    $sameCount = 0;
-    $index = 0;
-
-    foreach ($tmpArray as $vlaue => $infos)
-    {
-        if ($infos[0] < $maxCount)
-        {
-            continue;
-        }
-
-        if ($infos[0] === $maxCount)
-        {
-            $sameCount++;
-            continue;
-        }
-
-        $maxCount = $infos[0];
-        $index = $infos[1];
-        $sameCount = 0;
-    }
-
-    if ($sameCount !== 0)
-    {
-        return -1;
-    }
-
-    return $index;
+    return -1;
 }
