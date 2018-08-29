@@ -59,7 +59,9 @@ function solution($A) {
 
             $checker = $tmpArray[$target][1][$j][0];
 
-            if ($checker % 2 === 1 && $A[$checker + 1] !== $target)
+            if ($checker % 2 === 1 &&
+                $checker + 1 < $arrLength &&
+                $A[$checker + 1] !== $target)
             {
                 $result++;
             }
