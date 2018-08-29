@@ -8,7 +8,7 @@ function solution($A) {
 
     if ($arrLength < 1 || $arrLength > 100000) return 0;
 
-    if ($arrLength === 1) return 1;
+    if ($arrLength === 1) return 0;
 
     $tmpArray = [];
     
@@ -56,6 +56,13 @@ function solution($A) {
         if ($tmpArray[$target][1][$j][1] > $tmpHalfLength)
         {
             $result++;
+
+            $checker = $tmpArray[$target][1][$j][0];
+
+            if ($checker % 2 === 1 && $A[$checker + 1] !== $target)
+            {
+                $result++;
+            }
         }
     }
 
