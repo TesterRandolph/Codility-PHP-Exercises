@@ -8,8 +8,12 @@ function solution($A) {
 
     if ($arrLength < 0 || $arrLength > 100000) return -1;
 
+    if ($arrLength === 0) return -1;
+    
+    if ($arrLength === 1) return 0;
+
     $tmpArray = [];
-    $halfLength = $arrLength / 2;
+    $halfLength = ceil($arrLength / 2);
 
     for ($i = 0; $i < $arrLength; $i++)
     {
@@ -28,15 +32,30 @@ function solution($A) {
     }
 
     $maxCount = 0;
+    $sameCount = 0;
     $index = 0;
 
     foreach ($tmpArray as $vlaue => $infos)
     {
-        if ($infos[0] > $maxCount)
+        if ($infos[0] < $maxCount)
         {
-            $maxCount = $infos[0];
-            $index = $infos[1];
+            continue;
         }
+
+        if ($infos[0] === $maxCount)
+        {
+            $sameCount++;
+            continue;
+        }
+
+        $maxCount = $infos[0];
+        $index = $infos[1];
+        $sameCount = 0;
+    }
+
+    if ($sameCount !== 0)
+    {
+        return -1;
     }
 
     return $index;
