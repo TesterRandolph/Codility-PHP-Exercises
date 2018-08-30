@@ -11,7 +11,7 @@ function solution($A) {
     if ($arrLength === 1) return 0;
 
     $tmpArray = [];
-    
+
     if ($arrLength % 2 === 1)
     {
         $halfLength = ceil($arrLength / 2);
@@ -30,41 +30,53 @@ function solution($A) {
         if (!isset($tmpArray[$A[$i]]))
         {
             $tmpArray[$A[$i]][0] = 1;
-            $tmpArray[$A[$i]][1][] = [$i, 1];
+            $tmpArray[$A[$i]][1][$i] = 1;
             continue;
         }
 
         $tmpArray[$A[$i]][0]++;
-        $tmpArray[$A[$i]][1][] = [$i, $tmpArray[$A[$i]][0]];
+        $tmpArray[$A[$i]][1][$i] = $tmpArray[$A[$i]][0];
 
         if ($tmpArray[$A[$i]][0] >= $halfLength) $target = $A[$i];
     }
 
     $result = 0;
 
-    for ($j = 0; $j < $tmpArray[$target][0]; $j++)
+    $checker = 0;
+
+    for ($j = 0; $j < $arrLength; $j++)
     {
-        if ($tmpArray[$target][1][$j][0] % 2 === 1)
+        if (isset($tmpArray[$A[$j]][1][$j]))
         {
-            $tmpHalfLength = ceil($tmpArray[$target][1][$j][0] / 2);
+            $checker = $tmpArray[$A[$j]][1][$j];
+        }
+
+        $tmpLeftCount = $j + 1;
+
+        if ($tmpLeftCount % 2 === 1)
+        {
+            $tmpLeftHalfLength = ceil($tmpLeftCount / 2);
         }
         else
         {
-            $tmpHalfLength = $tmpArray[$target][1][$j][0] / 2 + 1;
+            $tmpLeftHalfLength = $tmpLeftCount / 2 + 1;
         }
 
-        if ($tmpArray[$target][1][$j][1] > $tmpHalfLength)
+        $tmpRightCount = $arrLength - $tmpLeftCount;
+
+        if ($tmpRightCount % 2 === 1)
+        {
+            $tmpRightHalfLength = ceil($tmpRightCount / 2);
+        }
+        else
+        {
+            $tmpRightHalfLength = $tmpRightCount / 2 + 1;
+        }
+
+        if ($checker >= $tmpLeftHalfLength &&
+            $tmpArray[$A[$j]][0] - $checker >= $tmpRightHalfLength)
         {
             $result++;
-
-            $checker = $tmpArray[$target][1][$j][0];
-
-            if ($checker % 2 === 1 &&
-                $checker + 1 < $arrLength &&
-                $A[$checker + 1] !== $target)
-            {
-                $result++;
-            }
         }
     }
 
