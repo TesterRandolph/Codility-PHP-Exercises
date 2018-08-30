@@ -41,40 +41,54 @@ function solution($A) {
     }
 
     $result = 0;
-
+    $jLimit = $arrLength - 1;
     $checker = 0;
 
-    for ($j = 0; $j < $arrLength; $j++)
+    for ($j = 0; $j < $jLimit; $j++)
     {
-        if (isset($tmpArray[$A[$j]][1][$j]))
+        if (isset($tmpArray[$target][1][$j]))
         {
-            $checker = $tmpArray[$A[$j]][1][$j];
+            $checker = $tmpArray[$target][1][$j];
         }
 
         $tmpLeftCount = $j + 1;
 
-        if ($tmpLeftCount % 2 === 1)
+        if ($tmpLeftCount === 1)
         {
-            $tmpLeftHalfLength = ceil($tmpLeftCount / 2);
+            $tmpLeftHalfLength = 1;
         }
         else
         {
-            $tmpLeftHalfLength = $tmpLeftCount / 2 + 1;
+            if ($tmpLeftCount % 2 === 1)
+            {
+                $tmpLeftHalfLength = ceil($tmpLeftCount / 2);
+            }
+            else
+            {
+                $tmpLeftHalfLength = $tmpLeftCount / 2 + 1;
+            }
         }
 
         $tmpRightCount = $arrLength - $tmpLeftCount;
 
-        if ($tmpRightCount % 2 === 1)
+        if ($tmpRightCount === 1)
         {
-            $tmpRightHalfLength = ceil($tmpRightCount / 2);
+            $tmpRightHalfLength = 1;
         }
         else
         {
-            $tmpRightHalfLength = $tmpRightCount / 2 + 1;
+            if ($tmpRightCount % 2 === 1)
+            {
+                $tmpRightHalfLength = ceil($tmpRightCount / 2);
+            }
+            else
+            {
+                $tmpRightHalfLength = $tmpRightCount / 2 + 1;
+            }
         }
 
         if ($checker >= $tmpLeftHalfLength &&
-            $tmpArray[$A[$j]][0] - $checker >= $tmpRightHalfLength)
+            $tmpArray[$target][0] - $checker >= $tmpRightHalfLength)
         {
             $result++;
         }
