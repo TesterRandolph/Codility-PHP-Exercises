@@ -34,6 +34,11 @@ function solution($A) {
 
             if ($tmp > $max)
             {
+                if ($j === $arrLength - 1)
+                {
+                    return $tmp;
+                }
+
                 $max = $tmp;
             }
         }
