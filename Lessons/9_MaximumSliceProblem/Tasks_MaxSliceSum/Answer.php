@@ -10,8 +10,7 @@ function solution($A) {
 
     if ($arrLength === 1) return $A[0];
 
-    $max = 0;
-    $maxArray = [];
+    $max = $A[0];
 
     for ($i = 0; $i < $arrLength; $i++)
     {
@@ -22,23 +21,17 @@ function solution($A) {
 
         for ($j = $i; $j < $arrLength; $j++)
         {
-            if ($i === 0 && $j === $i)
+            if ($j === $i)
             {
                 $tmp = $A[$j];
-                $max = $tmp;
-
-                continue;
             }
-            
-            $tmp += $A[$j];
+            else
+            {
+                $tmp += $A[$j];
+            }
 
             if ($tmp > $max)
             {
-                if ($j === $arrLength - 1)
-                {
-                    return $tmp;
-                }
-
                 $max = $tmp;
             }
         }
