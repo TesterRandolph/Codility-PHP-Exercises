@@ -10,7 +10,8 @@ function solution($A) {
 
     if ($arrLength === 1) return $A[0];
 
-    $sumArray = [];
+    $max = 0;
+    $maxArray = [];
 
     for ($i = 0; $i < $arrLength; $i++)
     {
@@ -18,39 +19,23 @@ function solution($A) {
 
         // take N element/time
         $tmp = 0;
-        $tmpArray = [];
 
         for ($j = $i; $j < $arrLength; $j++)
         {
-            if ($j === $i)
+            if ($i === 0 && $j === $i)
             {
                 $tmp = $A[$j];
-
-                $tmpArray[0] = [$i, $j];
-                $tmpArray[1] = $tmp;
-
-                $sumArray[] = $tmpArray;
+                $max = $tmp;
 
                 continue;
             }
             
             $tmp += $A[$j];
 
-            $tmpArray[0] = [$i, $j];
-            $tmpArray[1] = $tmp;
-
-            $sumArray[] = $tmpArray;
-        }
-    }
-
-    $max = 0;
-    $kLimit = sizeof($sumArray);
-
-    for ($k = 0; $k < $kLimit; $k++)
-    {
-        if ($k === 0 || $sumArray[$k][1] > $max)
-        {
-            $max = $sumArray[$k][1];
+            if ($tmp > $max)
+            {
+                $max = $tmp;
+            }
         }
     }
 
