@@ -11,16 +11,31 @@ function solution($A) {
     if ($arrLength === 1) return $A[0];
 
     $max = $A[0];
+    $negativeCount = 0;
 
     for ($i = 0; $i < $arrLength; $i++)
     {
         if ($A[$i] < -1000000 || $A[$i] > 1000000) return 0;
 
-        // take N element/time
+        if ($A[$i] === 0) continue;
+
+        if ($negativeCount !== 0 && $A[$i] < 0) continue;
+
         $tmp = 0;
 
+        // take N element/time
         for ($j = $i; $j < $arrLength; $j++)
         {
+            if ($A[$j] < 0)
+            {
+                if ($A[$j] > $max)
+                {
+                    $max = $A[$j];
+                }
+
+                $negativeCount++;
+            }
+
             if ($j === $i)
             {
                 $tmp = $A[$j];
@@ -35,6 +50,8 @@ function solution($A) {
                 $max = $tmp;
             }
         }
+
+        if ($negativeCount === $arrLength) break;
     }
 
     return $max;
