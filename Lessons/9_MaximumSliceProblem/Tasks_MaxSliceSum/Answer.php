@@ -14,26 +14,57 @@ function solution($A) {
     $negativeCount = 0;
     $negativeMax = 0;
 
+    $lastTmp = 0;
+    $sumJump = 0;
+    $hasJump = false;
+
     $max = 0;
 
     for ($i = 0; $i < $arrLength; $i++)
     {
         if ($A[$i] < -1000000 || $A[$i] > 1000000) return 0;
 
-        if ($A[$i] === 0) continue;
-        
-        if ($A[$i] < 0 && $negativeCheck === true)
+        if ($A[$i] === 0) 
         {
-            $negativeCount++;
-            
-            if ($i === 0 || $A[$i] > $negativeMax)
+            continue;
+        }
+
+        if ($A[$i] < 0)
+        {
+            if ($negativeCheck === true)
             {
-                $negativeMax = $A[$i];
+                $negativeCount++;
+                
+                if ($negativeMax === 0 || $A[$i] > $negativeMax)
+                {
+                    $negativeMax = $A[$i];
+                }
+            }
+
+            if ($i !== 0)
+            {
+                $sumJump += $A[$i];
+                $hasJump = true;
+                continue;
             }
         }
 
-        if ($i !== 0 && $A[$i] < 0) continue;
+        // jumping by negative < last postive
+        if ($hasJump === true && ($sumJump + $lastTmp) >= 0)
+        {
+            $sumJump = 0;
+            $hasJump = false;
+            $lastTmp = $A[$i];
 
+            if ($A[$i] > $max)
+            {
+                $max = $A[$i];
+            }
+
+            continue;
+        }
+
+        $lastTmp = $A[$i];
         $tmp = 0;
 
         // take N element/time
@@ -43,16 +74,9 @@ function solution($A) {
 
             if ($i !== 0 ) $negativeCheck = false;
 
-            if ($j === $i)
-            {
-                $tmp = $A[$j];
-            }
-            else
-            {
-                $tmp += $A[$j];
-            }
+            $tmp += $A[$j];
 
-            if ($A[$j] > $max || $tmp > $max)
+            if ($tmp > $max)
             {
                 $max = $tmp;
             }
