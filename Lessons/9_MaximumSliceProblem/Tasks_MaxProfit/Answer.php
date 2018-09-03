@@ -21,6 +21,8 @@ function solution($A) {
 
     for ($i = 0; $i < $iLimit; $i++)
     {
+        if ($A[$i] < 0 || $A[$i] > 2000000) return 0;
+
         $next = $i + 1;
         $profit = $A[$next] - $A[$i];
         $tmpArray[$tmpLength] = [$i, $next, $profit];
@@ -44,7 +46,7 @@ function solution($A) {
 
         for ($k = $j; $k < $tmpLength; $k++)
         {
-            if ($tmpArray[$k][2] > 0 && $tmpProfit < 0) break;
+            if ($tmpProfit + $tmpArray[$k][2] <= 0) break;
 
             $tmpProfit += $tmpArray[$k][2];
 
