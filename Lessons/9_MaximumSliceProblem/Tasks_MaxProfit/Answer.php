@@ -52,9 +52,9 @@ function solution($A) {
 
         for ($k = $j; $k < $tmpLength; $k++)
         {
-            if ($tmpProfit + $tmpArray[$k][2] <= 0) break;
-
             $tmpProfit += $tmpArray[$k][2];
+
+            if ($tmpProfit <= 0 && $tmpArray[$k][2] < 0) break;
 
             if ($tmpProfit > $max) $max = $tmpProfit;
         }
