@@ -18,6 +18,7 @@ function solution($A) {
     $iLimit = $arrLength - 1;
 
     $negativeCount = 0;
+    $zeroCount = 0;
 
     $totalProfit = 0;
 
@@ -32,13 +33,18 @@ function solution($A) {
         $tmpArray[$tmpLength] = [$i, $next, $profit];
         $tmpLength++;
 
-        if ($profit <= 0)
+        if ($profit < 0)
         {
             $negativeCount++;
         }
+
+        if ($profit === 0)
+        {
+            $zeroCount++;
+        }
     }
 
-    if ($negativeCount === $iLimit) return 0;
+    if ($negativeCount + $zeroCount === $iLimit) return 0;
 
     if ($negativeCount === 0) return $totalProfit;
 
