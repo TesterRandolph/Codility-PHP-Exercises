@@ -17,10 +17,8 @@ function solution($A) {
 
     $iLimit = $arrLength - 1;
 
+    $postiveCount = 0;
     $negativeCount = 0;
-    $zeroCount = 0;
-
-    $totalProfit = 0;
 
     for ($i = 0; $i < $iLimit; $i++)
     {
@@ -28,25 +26,21 @@ function solution($A) {
 
         $next = $i + 1;
         $profit = $A[$next] - $A[$i];
-        $totalProfit += $profit;
-
         $tmpArray[$tmpLength] = [$i, $next, $profit];
         $tmpLength++;
+
+        if ($profit > 0)
+        {
+            $postiveCount++;
+        }
 
         if ($profit < 0)
         {
             $negativeCount++;
         }
-
-        if ($profit === 0)
-        {
-            $zeroCount++;
-        }
     }
 
-    if ($negativeCount + $zeroCount === $iLimit) return 0;
-
-    if ($negativeCount === 0) return $totalProfit;
+    if ($negativeCount === $iLimit) return 0;
 
     $max = 0;
 
@@ -64,6 +58,8 @@ function solution($A) {
 
             if ($tmpProfit > $max) $max = $tmpProfit;
         }
+
+        if ($postiveCount === $iLimit) break;
     }
 
     return $max;
