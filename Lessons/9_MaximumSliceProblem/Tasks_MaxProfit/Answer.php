@@ -38,18 +38,20 @@ function solution($A) {
 
     for ($j = 0; $j < $tmpLength; $j++)
     {
-        if ($tmpArray[$j][2] < 0) continue;
+        if ($tmpArray[$j][2] <= 0) continue;
 
         $tmpProfit = 0;
 
         for ($k = $j; $k < $tmpLength; $k++)
         {
-            if ($tmpProfit + $tmpArray[$k][2] < 0) break;
+            if ($tmpArray[$k][2] > 0 && $tmpProfit < 0) break;
 
             $tmpProfit += $tmpArray[$k][2];
 
             if ($tmpProfit > $max) $max = $tmpProfit;
         }
+
+        if ($negativeCount === 0) break;
     }
 
     return $max;
