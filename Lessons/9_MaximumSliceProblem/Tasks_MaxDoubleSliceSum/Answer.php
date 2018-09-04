@@ -19,7 +19,7 @@ function solution($A) {
         
         if ($A[$s] > 0) $postiveCount++;
 
-        if ($s === 0 || $s + 1 === $arrLength) continue;
+        if ($s === 0 || ($s + 1) === $arrLength) continue;
 
         if ($s === 1) $max = $A[$s];
 
@@ -35,11 +35,6 @@ function solution($A) {
     {
         $startLeft = $i;
         $jLimit = $arrLength - 2 - ($startLeft);
-
-        if ($i === 0)
-        {
-            $max = $A[$startLeft];
-        }
 
         $leftSum = 0;
 
@@ -73,7 +68,7 @@ function solution($A) {
                     $rightSum += $A[$startRight + $k];
                 }
 
-                if ($leftSum + $rightSum > $max)
+                if (($leftSum + $rightSum) > $max)
                 {
                     $max = $leftSum + $rightSum;
                 }
