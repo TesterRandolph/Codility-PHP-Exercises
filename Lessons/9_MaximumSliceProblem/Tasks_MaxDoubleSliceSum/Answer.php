@@ -8,11 +8,16 @@ function solution($A) {
 
     if ($arrLength < 3 || $arrLength > 100000) return 0;
 
+    if ($arrLength === 3) return 0;
+
+    $postiveCount = 0;
     $max = 0;
 
     for ($s = 0; $s < $arrLength; $s++)
     {
         if ($A[$s] < -10000 || $A[$s] > 10000) return 0;
+        
+        if ($A[$s] > 0) $postiveCount++;
 
         if ($s === 0 || $s + 1 === $arrLength) continue;
 
@@ -20,6 +25,8 @@ function solution($A) {
 
         if ($A[$s] > $max) $max = $A[$s];
     }
+
+    if ($postiveCount === 0) return 0;
 
     $iLimit = $arrLength - 3;
 
@@ -49,10 +56,22 @@ function solution($A) {
 
             $rightSum = 0;
 
-            // get $k elements from right
-            for ($k = 1; $k < $kLimit; $k++)
+            if ($j === 0)
             {
-                $rightSum += $A[$startRight + $k];
+                $kStart = 1;
+            }
+            else
+            {
+                $kStart = 0;
+            }
+
+            // get $k elements from right
+            for ($k = $kStart; $k < $kLimit; $k++)
+            {
+                if ($k !== 0)
+                {
+                    $rightSum += $A[$startRight + $k];
+                }
 
                 if ($leftSum + $rightSum > $max)
                 {
